@@ -37,3 +37,7 @@ mushroom-yield-project/
 
 ```bash
 pip install -r requirements.txt
+
+## Author
+
+Aleesha Benjamin
