@@ -21,6 +21,8 @@ df = df[df["humidity"] >= 0]
 df = df[df["humidity"] <= 100]
 df = df[df["CO2"] > 0]
 
+
+
 # Save cleaned data
 df.to_parquet("data/processed/02_cleaned.parquet", index=False)
 print("\nCleaned Shape:", df.shape)
