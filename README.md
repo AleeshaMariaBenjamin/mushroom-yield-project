@@ -37,7 +37,9 @@ mushroom-yield-project/
 
 ```bash
 pip install -r requirements.txt
+  
 
+  
 ## Dataset Columns
 
 - timestamp: Date and time of sensor reading
