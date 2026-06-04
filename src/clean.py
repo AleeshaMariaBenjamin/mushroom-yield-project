@@ -4,6 +4,8 @@ import pandas as pd
 df = pd.read_csv("data/interim/01_loaded.csv")
 print("\nColumns in dataset:")
 print(df.columns)
+df = pd.read_csv("data/interim/01_loaded.csv")
+print("Rows in dataset:", len(df))
 
 print("Original Shape:", df.shape)
 
@@ -20,8 +22,7 @@ df = df[df["humidity"] <= 100]
 df = df[df["CO2"] > 0]
 
 # Save cleaned data
-df.to_csv("data/processed/02_cleaned.csv", index=False)
-
+df.to_parquet("data/processed/02_cleaned.parquet", index=False)
 print("\nCleaned Shape:", df.shape)
 
 # Cleaning log
