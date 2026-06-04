@@ -38,6 +38,14 @@ mushroom-yield-project/
 ```bash
 pip install -r requirements.txt
 
+## Dataset Columns
+
+- timestamp: Date and time of sensor reading
+- temperature: Temperature inside the polyhouse (°C)
+- humidity: Relative humidity (%)
+- CO2: Carbon dioxide concentration (ppm)
+- yield: Mushroom yield harvested
+
 ## Author
 
 Aleesha Benjamin
