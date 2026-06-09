@@ -48,6 +48,17 @@ pip install -r requirements.txt
 - CO2: Carbon dioxide concentration (ppm)
 - yield: Mushroom yield harvested
 
+
+## Features
+
+- temperature: Polyhouse temperature (°C)
+- humidity: Relative humidity (%)
+- co2: Carbon dioxide concentration (ppm)
+- temp_humidity_interaction: Temperature × Humidity interaction feature
+
+Target:
+- yield: Mushroom yield harvested (kg)
+
 ## Author
 
 Aleesha Benjamin
