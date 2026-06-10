@@ -24,6 +24,7 @@ df = df.drop_duplicates()
 after_dup = len(df)
 print(f"\nDuplicates removed: {before_dup - after_dup}")
 
+
 # Step 3 - Validity rules
 before_filter = len(df)
 df = df[df["humidity"] >= 0]
