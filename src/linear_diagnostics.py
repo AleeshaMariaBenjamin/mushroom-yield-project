@@ -59,24 +59,16 @@ plt.close()
 plt.figure(figsize=(8,5))
 
 plt.scatter(
-    y_test,
-    y_pred
+    test_df["humidity"],
+    residuals
 )
 
-plt.xlabel(
-    "Actual Yield"
-)
-
-plt.ylabel(
-    "Predicted Yield"
-)
-
-plt.title(
-    "Actual vs Predicted Yield"
-)
+plt.xlabel("Humidity")
+plt.ylabel("Residuals")
+plt.title("Residuals vs Humidity")
 
 plt.savefig(
-    "reports/actual_vs_predicted.png"
+    "reports/residual_vs_humidity_linear.png"
 )
 
 plt.close()

@@ -14,6 +14,7 @@ features.append("temp_humidity_interaction")
 X = df[features]
 y = df["yield"]
 print(X.isna().sum())
+
 print(y.isna().sum())
 scaler = MinMaxScaler()
 
