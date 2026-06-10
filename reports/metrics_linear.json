@@ -1,0 +1,17 @@
+import json
+
+metrics = {
+    "MAE": float(mae),
+    "RMSE": float(rmse),
+    "R2": float(r2)
+}
+
+with open(
+    "reports/metrics_linear.json",
+    "w"
+) as f:
+    json.dump(
+        metrics,
+        f,
+        indent=4
+    )
