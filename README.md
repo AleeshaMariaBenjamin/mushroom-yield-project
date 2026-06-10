@@ -55,6 +55,21 @@ pip install -r requirements.txt
 - humidity: Relative humidity (%)
 - co2: Carbon dioxide concentration (ppm)
 - temp_humidity_interaction: Temperature × Humidity interaction feature
+Chronological Train-Test Split
+
+The dataset was sorted by timestamp before splitting. An 80/20 chronological split was performed to prevent future information leakage.
+
+Training Period:
+2025-01-01 06:00:00 to 2025-01-17 21:00:00
+
+Testing Period:
+2025-01-17 22:00:00 to 2025-01-22 01:00:00
+
+Training Rows: 400
+Testing Rows: 100
+
+MinMaxScaler was fitted only on the training data and then applied to the test data using the same scaling parameters. The train dataset, test dataset, and scaler object were saved under data/processed for reproducibility.
+
 
 Target:
 - yield: Mushroom yield harvested (kg)
