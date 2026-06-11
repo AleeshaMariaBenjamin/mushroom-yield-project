@@ -77,3 +77,32 @@ Target:
 ## Author
 
 Aleesha Benjamin
+
+Model                MAE     RMSE     R²
+------------------------------------------
+Linear Regression    
+Random Forest   
+
+
+Feature Importance Interpretation
+
+CO2 was the most important feature for
+predicting mushroom yield.
+
+Humidity was the second most important
+feature.
+
+Temperature had the lowest influence.
+
+
+Conclusion
+
+Random Forest was compared with
+Linear Regression.
+
+The model achieved a lower error and
+higher R² score, indicating better
+prediction performance.
+
+Therefore Random Forest is the preferred
+model for this dataset.
