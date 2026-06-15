@@ -18,8 +18,13 @@ model = joblib.load(
 features = [
     "temperature",
     "humidity",
-    "CO2"
+    "CO2",
+    "temp_humidity_interaction"
 ]
+
+test_df["temp_humidity_interaction"] = (
+    test_df["temperature"] * test_df["humidity"]
+)
 
 X_test = test_df[features]
 

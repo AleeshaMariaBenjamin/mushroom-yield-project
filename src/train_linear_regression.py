@@ -19,10 +19,18 @@ test_df = pd.read_csv(
 scaler = joblib.load(
     "data/processed/minmax_scaler.pkl"
 )
+train_df["temp_humidity_interaction"] = (
+    train_df["temperature"] * train_df["humidity"]
+)
+test_df["temp_humidity_interaction"] = (
+    test_df["temperature"] * test_df["humidity"]
+)
+
 features = [
     "temperature",
     "humidity",
-    "CO2"
+    "CO2",
+    "temp_humidity_interaction"
 ]
 X_train = train_df[features]
 X_test = test_df[features]
@@ -73,5 +81,16 @@ print("\nCoefficients:")
 for feature, coef in zip(features, model.coef_):
     print(feature, ":", coef)
 
-    metrics = {...}
-    joblib.dump(model, "models/linear_regression.joblib")
+metrics = {
+    "MAE": float(mae),
+    "RMSE": float(rmse),
+    "R2": float(r2)
+}
+
+with open("reports/metrics_linear.json", "w") as f:
+    json.dump(metrics, f, indent=4)
+
+print("\nMetrics saved to reports/metrics_linear.json")
+
+joblib.dump(model, "models/linear_regression.joblib")
+print("Model saved to models/linear_regression.joblib")

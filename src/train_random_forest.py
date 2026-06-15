@@ -19,6 +19,8 @@ test_df = pd.read_csv(
 )
 
 # Features and target
+# Note: Random Forest is tree-based and does not require feature scaling.
+# Unlike Linear Regression, it is not sensitive to the magnitude of values.
 X_train = train_df.drop(
     columns=["yield", "timestamp"]
 )

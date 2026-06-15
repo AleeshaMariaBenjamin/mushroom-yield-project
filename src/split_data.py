@@ -36,13 +36,20 @@ assert (
     <
     test_df["timestamp"].min()
 )
+train_df["temp_humidity_interaction"] = (
+    train_df["temperature"] * train_df["humidity"]
+)
+test_df["temp_humidity_interaction"] = (
+    test_df["temperature"] * test_df["humidity"]
+)
+
 features = [
     "temperature",
     "humidity",
-    "CO2"
+    "CO2",
+    "temp_humidity_interaction"
 ]
 X_train = train_df[features]
-
 X_test = test_df[features]
 
 y_train = train_df["yield"]

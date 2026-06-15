@@ -106,3 +106,7 @@ prediction performance.
 
 Therefore Random Forest is the preferred
 model for this dataset.
+
+## Champion Model
+
+The Tuned Random Forest Regressor was selected as the champion model because it achieved the lowest Mean Absolute Error (MAE) on the untouched test dataset. The model demonstrated better predictive accuracy than both the Linear Regression model and the default Random Forest model. Therefore, it was chosen as the final model for mushroom yield prediction.

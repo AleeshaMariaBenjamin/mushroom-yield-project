@@ -1,17 +1,5 @@
-import json
-
-metrics = {
-    "MAE": float(mae),
-    "RMSE": float(rmse),
-    "R2": float(r2)
+{
+    "MAE": 0.07142021851397548,
+    "RMSE": 0.10000703751250271,
+    "R2": 0.7995842850498869
 }
-
-with open(
-    "reports/metrics_linear.json",
-    "w"
-) as f:
-    json.dump(
-        metrics,
-        f,
-        indent=4
-    )
