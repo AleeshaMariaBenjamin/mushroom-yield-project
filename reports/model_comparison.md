@@ -2,69 +2,60 @@
 
 ## Performance Metrics
 
-| Model             | MAE    | RMSE   | R²     |
-| ----------------- | ------ | ------ | ------ |
-| Linear Regression | 0.0823 | 0.1066 | 0.7722 |
-| Random Forest     | 0.0620 | 0.0991 | 0.8033 |
-|randomforest(tuned)|0.0610  |0.0965  | 0.8135 |
-| Model | Test MAE |
-|---------|---------|
-| Linear Regression | 0.0823|
-| Random Forest (Default) | 0.0620 |
-| Random Forest (Tuned) | 0.0618 |
+### Cross-Validation + Test Metrics
+
+| Model | CV MAE | Test MAE | Test RMSE | Test R² |
+|---|---|---|---|---|
+| Linear Regression | 0.0795 | 0.0823 | 0.1066 | 0.7722 |
+| Random Forest (Default) | 0.0610 | 0.0620 | 0.0991 | 0.8033 |
+| Random Forest (Tuned) | 0.0598 | 0.0610 | 0.0965 | 0.8135 |
 
 ## Feature Importance (Random Forest)
 
-| Feature     | Importance |
-| ----------- | ---------- |
-| Temperature | 0.691      |
-| Humidity    | 0.169      |
-| CO₂         | 0.140      |
+| Feature | Importance |
+|---|---|
+| Temperature | 0.691 |
+| Humidity | 0.169 |
+| CO₂ | 0.140 |
 
 ## Linear Regression Coefficients
 
-| Feature     | Coefficient |
-| ----------- | ----------- |
-| Temperature | 0.2679      |
-| Humidity    | -0.3829     |
-| CO₂         | 0.2813      |
+| Feature | Coefficient |
+|---|---|
+| Temperature | 0.2679 |
+| Humidity | -0.3829 |
+| CO₂ | 0.2813 |
 
 ## Analysis
 
-The Random Forest model achieved better performance than the Linear Regression baseline across all evaluation metrics.
+All three models were trained on the same dataset and evaluated on the same unseen test set.
 
-* MAE decreased from 0.0823 to 0.0620.
-* RMSE decreased from 0.1066 to 0.0991.
-* R² increased from 0.7722 to 0.8033.
+- Linear Regression achieved R² = 0.7722, meaning it explains 77% of yield variation. It serves as the baseline.
+- Default Random Forest improved on this with R² = 0.8033 and MAE = 0.0620, capturing non-linear relationships between sensor readings and yield.
+- Tuned Random Forest (best params: n_estimators=50, max_depth=5, min_samples_leaf=1) achieved the best results with R² = 0.8135 and MAE = 0.0610.
 
-These results indicate that Random Forest captures the relationships between environmental variables and mushroom yield more effectively than Linear Regression.
-
-Feature importance analysis shows that temperature is the most influential feature, contributing approximately 69.1% of the model's predictive power.
-
-## Conclusion
-
-Random Forest outperformed Linear Regression on the test dataset. The reduction in prediction error and improvement in R² score justify the added complexity of the Random Forest model. Therefore, Random Forest is selected as the preferred model for mushroom yield prediction.
-
-| Model | Test MAE |
-|---------|---------|
-| Linear Regression | 0.0823|
-| Random Forest (Default) | 0.0620 |
-| Random Forest (Tuned) | 0.0618 |
+Temperature is the most influential feature at 69.1% importance, which aligns with the biological sensitivity of mushrooms to temperature.
 
 ## Champion Model
 
-The Tuned Random Forest Regressor was selected as the champion model because it achieved the lowest Mean Absolute Error (MAE) on the untouched test dataset. The model demonstrated better predictive accuracy than both the Linear Regression model and the default Random Forest model. Therefore, it was chosen as the final model for mushroom yield prediction.
+**Tuned Random Forest** is selected as the champion model.
+
+It achieved the lowest MAE (0.0610) and highest R² (0.8135) on the unseen test set. It was selected through GridSearchCV with TimeSeriesSplit (5 folds), testing 27 hyperparameter combinations — making the selection evidence-based rather than arbitrary.
+
+The best hyperparameters found were:
+- `n_estimators`: 50
+- `max_depth`: 5
+- `min_samples_leaf`: 1
+
+Saved to: `models/champion.joblib`
 
 ## Limitations
 
 1. The model was trained only on the available sensor ranges for temperature, humidity, and CO2. Predictions may be unreliable when sensor values fall outside the observed training range.
-
-2. The dataset may not fully capture seasonal variations in mushroom growth. Changes in weather, climate, or production cycles could affect model performance.
-
-3. The model relies only on the provided sensor measurements and does not account for other factors such as substrate quality, disease occurrence, or farm management practices.
-
-4. Performance was evaluated on a single historical test period and may vary when deployed on future data.
+2. The dataset may not fully capture seasonal variations in mushroom growth.
+3. The model does not account for other factors such as substrate quality, disease occurrence, or farm management practices.
+4. Performance was evaluated on a single historical test period and may vary on future data.
 
 ## Evaluation Procedure
 
-All models were evaluated using the same untouched test dataset created during the chronological train-test split. No model tuning or training was performed on the test data. This ensured a fair comparison between models.
+All models were evaluated on the same unseen test set created during a chronological 80/20 train-test split. No model tuning or training was performed on the test data. Cross-validation was performed using TimeSeriesSplit to respect the time-ordered nature of the sensor data.
