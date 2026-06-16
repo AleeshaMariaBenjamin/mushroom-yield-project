@@ -110,3 +110,88 @@ model for this dataset.
 ## Champion Model
 
 The Tuned Random Forest Regressor was selected as the champion model because it achieved the lowest Mean Absolute Error (MAE) on the untouched test dataset. The model demonstrated better predictive accuracy than both the Linear Regression model and the default Random Forest model. Therefore, it was chosen as the final model for mushroom yield prediction.
+
+
+## Run Inference
+
+This project includes a trained champion Random Forest model for mushroom yield prediction.
+
+### Prerequisites
+
+Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+### Project Artifacts
+
+The following files are required for inference:
+
+```text
+models/
+├── champion.joblib
+├── minmax_scaler.joblib
+└── feature_list.json
+```
+
+### Making a Prediction
+
+Use the `predict_yield()` function from `predict.py`.
+
+Example:
+
+```python
+from src.predict import predict_yield
+
+prediction = predict_yield(
+    temperature=25,
+    humidity=80,
+    CO2=1000
+)
+
+print(
+    f"Predicted Yield: {prediction}"
+)
+```
+
+### Running the Test Script
+
+Execute:
+
+```bash
+python src/test_predict.py
+```
+
+Example output:
+
+```text
+Predicted Yield: 1.0905799157567575
+```
+
+### Verification of Inference Pipeline
+
+The prediction pipeline was verified by comparing outputs from the public inference function (`predict_yield`) with direct model predictions using identical inputs.
+
+Verification result:
+
+```text
+Predicted Yield: 1.0905799157567575
+Prediction:      1.0905799157567575
+```
+
+Both outputs matched exactly, confirming that the inference pipeline loads the model, scaler, and feature list correctly and produces consistent predictions.
+
+### Input Features
+
+The model expects the following inputs:
+
+* Temperature
+* Humidity
+* CO2
+
+The feature `temp_humidity_interaction` is generated automatically during inference.
+
+### Champion Model
+
+The selected champion model is the tuned Random Forest Regressor obtained through GridSearchCV hyperparameter tuning and evaluated on an untouched test set.

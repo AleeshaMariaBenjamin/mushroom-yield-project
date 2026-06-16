@@ -161,3 +161,16 @@ with open("reports/tuning_results.json", "w") as f:
     json.dump(tuning_results, f, indent=4)
 
 print("Tuning results saved to reports/tuning_results.json")
+
+
+import json
+
+features = [
+    "temperature",
+    "humidity",
+    "CO2",
+    "temp_humidity_interaction"
+]
+
+with open("models/feature_list.json", "w") as f:
+    json.dump(features, f)
