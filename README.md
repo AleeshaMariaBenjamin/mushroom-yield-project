@@ -195,3 +195,36 @@ The feature `temp_humidity_interaction` is generated automatically during infere
 ### Champion Model
 
 The selected champion model is the tuned Random Forest Regressor obtained through GridSearchCV hyperparameter tuning and evaluated on an untouched test set.
+
+
+## Streamlit Application
+
+Run the web application:
+
+```bash
+streamlit run app.py
+```
+
+The application accepts:
+
+* Temperature (°C)
+* Humidity (%)
+* CO₂ (ppm)
+
+and predicts mushroom yield using the trained Random Forest champion model.
+
+### Example Input
+
+* Temperature = 25°C
+* Humidity = 80%
+* CO₂ = 1000 ppm
+
+### Example Output
+
+Predicted Yield = 1.09 kg
+
+A screenshot of the application is available in:
+
+```text
+reports/streamlit_app.png
+```
