@@ -238,3 +238,18 @@ Test Scenario Table
 | High CO₂          | 24          | 80       | 1500 | Prediction should increase or vary depending on model |
 | Extreme Inputs    | 40          | 20       | 2000 | Prediction still generated without crashing           |
 | Boundary Inputs   | 0           | 0        | 0    | Model returns valid numeric output                    |
+
+
+## Deployment
+
+Live App:
+
+[Streamlit Deployment Link](PASTE_LINK_HERE)
+
+Main entry file:
+
+app.py
+
+Start command:
+
+streamlit run app.py

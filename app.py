@@ -66,18 +66,13 @@ def predict_yield(
 
     data = data[features]
 
-    scaled = scaler.transform(
-        data
-    )
-
     prediction = model.predict(
-        scaled
+        data
     )
 
     return float(
         prediction[0]
     )
-
 
 # =====================
 # APP UI
