@@ -228,3 +228,13 @@ A screenshot of the application is available in:
 ```text
 reports/streamlit_app.png
 ```
+Test Scenario Table
+
+| Test Case         | Temperature | Humidity | CO₂  | Expected Behavior                                     |
+| ----------------- | ----------- | -------- | ---- | ----------------------------------------------------- |
+| Normal Conditions | 24          | 80       | 900  | Prediction should be reasonable and positive          |
+| High Temperature  | 32          | 80       | 900  | Yield may decrease compared to optimal conditions     |
+| Low Humidity      | 24          | 50       | 900  | Prediction should change noticeably                   |
+| High CO₂          | 24          | 80       | 1500 | Prediction should increase or vary depending on model |
+| Extreme Inputs    | 40          | 20       | 2000 | Prediction still generated without crashing           |
+| Boundary Inputs   | 0           | 0        | 0    | Model returns valid numeric output                    |

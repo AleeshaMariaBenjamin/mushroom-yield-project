@@ -5,24 +5,40 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+st.set_page_config(
+    page_title="Mushroom Yield Predictor",
+    page_icon="🍄"
+)
+
 
 @st.cache_resource
 def load_artifacts():
 
-    model = joblib.load(
-        "models/champion.joblib"
-    )
+    try:
 
-    scaler = joblib.load(
-        "models/minmax_scaler.joblib"
-    )
+        model = joblib.load(
+            "models/champion.joblib"
+        )
 
-    with open(
-        "models/feature_list.json"
-    ) as f:
-        features = json.load(f)
+        scaler = joblib.load(
+            "models/minmax_scaler.joblib"
+        )
 
-    return model, scaler, features
+        with open(
+            "models/feature_list.json"
+        ) as f:
+
+            features = json.load(f)
+
+        return model, scaler, features
+
+    except FileNotFoundError:
+
+        st.error(
+            "Model files not found. Please restore the model artifacts."
+        )
+
+        st.stop()
 
 
 def predict_yield(
@@ -43,8 +59,9 @@ def predict_yield(
         "temperature": [temperature],
         "humidity": [humidity],
         "CO2": [CO2],
-        "temp_humidity_interaction":
-            [interaction]
+        "temp_humidity_interaction": [
+            interaction
+        ]
     })
 
     data = data[features]
@@ -144,16 +161,20 @@ if CO2 > 1800:
 
 if st.button("Predict Yield"):
 
-    prediction = predict_yield(
-        temperature,
-        humidity,
-        CO2
-    )
+    with st.spinner(
+        "Predicting..."
+    ):
+
+        prediction = predict_yield(
+            temperature,
+            humidity,
+            CO2
+        )
+
     st.write(
-    temperature,
-    humidity,
-    CO2
-)
+        f"Inputs → Temperature: {temperature}°C | Humidity: {humidity}% | CO₂: {CO2} ppm"
+    )
+
     st.metric(
         label="Predicted Yield",
         value=f"{prediction:.2f} kg"
@@ -163,7 +184,10 @@ if st.button("Predict Yield"):
     # SENSITIVITY CHART
     # =====================
 
-    temps = np.arange(15, 41)
+    temps = np.arange(
+        15,
+        41
+    )
 
     predictions = []
 
@@ -175,7 +199,9 @@ if st.button("Predict Yield"):
             CO2
         )
 
-        predictions.append(pred)
+        predictions.append(
+            pred
+        )
 
     fig, ax = plt.subplots()
 
@@ -196,7 +222,9 @@ if st.button("Predict Yield"):
         "Yield Sensitivity to Temperature"
     )
 
-    st.pyplot(fig)
+    st.pyplot(
+        fig
+    )
 
 # =====================
 # CHART EXPLANATION
@@ -207,11 +235,10 @@ with st.expander(
 ):
 
     st.write("""
-    This chart shows how predicted
-    yield changes as temperature
-    changes while humidity and CO₂
-    remain fixed.
-    """)
+This chart shows how predicted yield
+changes as temperature changes while
+humidity and CO₂ remain fixed.
+""")
 
 # =====================
 # MODEL INFORMATION
