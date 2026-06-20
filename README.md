@@ -253,3 +253,14 @@ app.py
 Start command:
 
 streamlit run app.py
+
+## Repository Structure
+
+mushroom-yield-project/
+
+├── app.py
+├── models/
+├── src/
+├── reports/
+├── requirements.txt
+└── README.md
