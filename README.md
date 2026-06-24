@@ -244,7 +244,7 @@ Test Scenario Table
 
 Live App:
 
-[Streamlit Deployment Link](PASTE_LINK_HERE)
+[Streamlit Deployment Link](https://aleeshamariabenjamin-mushroom-yield-project-app-ozckve.streamlit.app/)
 
 Main entry file:
 
