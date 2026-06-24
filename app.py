@@ -4,6 +4,9 @@ import json
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import csv
+import os
+from datetime import datetime
 
 st.set_page_config(
     page_title="Mushroom Yield Predictor",
@@ -156,15 +159,55 @@ if CO2 > 1800:
 
 if st.button("Predict Yield"):
 
-    with st.spinner(
-        "Predicting..."
-    ):
+    prediction = predict_yield(
+        temperature,
+        humidity,
+        CO2
+    )
 
-        prediction = predict_yield(
+    # logging code AFTER prediction exists
+
+    os.makedirs(
+        "logs",
+        exist_ok=True
+    )
+
+    log_file = "logs/predictions.csv"
+
+    file_exists = os.path.isfile(
+        log_file
+    )
+
+    with open(
+        log_file,
+        "a",
+        newline=""
+    ) as f:
+
+        writer = csv.writer(f)
+
+        if not file_exists:
+
+            writer.writerow([
+                "timestamp",
+                "temperature",
+                "humidity",
+                "CO2",
+                "prediction"
+            ])
+
+        writer.writerow([
+            datetime.now(),
             temperature,
             humidity,
-            CO2
-        )
+            CO2,
+            prediction
+        ])
+
+    st.metric(
+        label="Predicted Yield",
+        value=f"{prediction:.2f} kg"
+    )       
 
     st.write(
         f"Inputs → Temperature: {temperature}°C | Humidity: {humidity}% | CO₂: {CO2} ppm"

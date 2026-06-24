@@ -38,3 +38,31 @@ Artifacts used by the application:
 * models/feature_list.json
 
 These files are committed to the repository and loaded during application startup.
+
+# Monitoring Plan
+
+## Logged Fields
+
+- Timestamp
+- Temperature
+- Humidity
+- CO2
+- Prediction
+
+## Drift Scenarios
+
+1. Sensor calibration changes
+2. Seasonal weather shifts
+3. New mushroom cultivation practices
+
+## Retrain Triggers
+
+- MAE increases by more than 20%
+- Significant input distribution drift
+- Monthly model performance review
+
+## Future Improvements
+
+1. Real-time IoT sensor integration
+2. Automated retraining pipeline
+3. Cloud database for prediction storage
